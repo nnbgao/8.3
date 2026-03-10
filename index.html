@@ -81,10 +81,9 @@
 
         .cloud {
             position: absolute;
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 1000px;
             box-shadow: 0 5px 15px rgba(255, 192, 203, 0.2);
-            backdrop-filter: blur(2px);
             animation: floatCloud linear infinite;
         }
 
@@ -92,7 +91,7 @@
         .cloud::after {
             content: '';
             position: absolute;
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 50%;
             box-shadow: 0 5px 15px rgba(255, 192, 203, 0.2);
         }
@@ -209,7 +208,7 @@
             opacity: 0;
         }
 
-        .star1 { width: 4px; height: 4px; top: 10%; left: 15%; animation-duration: 2s; animation-delay: 0s; }
+        .star1 { width: 4px; height: 4px; top: 10%; left: 15%; animation-duration: 2s; }
         .star2 { width: 3px; height: 3px; top: 25%; left: 85%; animation-duration: 2.5s; animation-delay: 0.7s; }
         .star3 { width: 5px; height: 5px; top: 40%; left: 30%; animation-duration: 3s; animation-delay: 1.2s; }
         .star4 { width: 3px; height: 3px; top: 55%; left: 70%; animation-duration: 2.2s; animation-delay: 0.3s; }
@@ -229,12 +228,10 @@
             0%, 100% { 
                 opacity: 0;
                 transform: scale(0.5);
-                box-shadow: 0 0 5px #ffd9e6;
             }
             50% { 
                 opacity: 1;
                 transform: scale(1);
-                box-shadow: 0 0 15px #ffb3c6, 0 0 30px #ff99aa;
             }
         }
 
@@ -252,7 +249,6 @@
                 padding: 10px !important;
             }
             
-            /* Điều chỉnh mây trên mobile */
             .cloud1 { width: 150px; height: 50px; }
             .cloud1::before { width: 70px; height: 70px; top: -35px; }
             .cloud1::after { width: 85px; height: 85px; top: -42px; }
@@ -296,6 +292,7 @@
             opacity: 1;
             width: 100%;
             height: 100%;
+            overflow: hidden;
         }
         
         .bubble-text { 
@@ -358,6 +355,7 @@
             width: 100%;
             height: 100%;
             padding: 5px;
+            overflow: hidden;
         }
         
         .book-container {
@@ -368,6 +366,7 @@
             height: 100%;
             position: relative;
             z-index: 51;
+            overflow: hidden;
         }
 
         .book {
@@ -378,6 +377,7 @@
             transform: translateX(calc(var(--book-w) / 2)) rotateX(2deg);
             max-width: 100%;
             filter: drop-shadow(0 20px 30px rgba(255, 77, 109, 0.2));
+            overflow: visible;
         }
 
         .page {
@@ -390,6 +390,7 @@
             transform-style: preserve-3d;
             transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            overflow: visible;
         }
         
         .page.flipped { 
@@ -470,6 +471,20 @@
             text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
         }
 
+        /* Ẩn thanh cuộn cho page-text */
+        .page-text::-webkit-scrollbar {
+            width: 3px;
+        }
+        
+        .page-text::-webkit-scrollbar-track {
+            background: #ffe4e4;
+        }
+        
+        .page-text::-webkit-scrollbar-thumb {
+            background: var(--pink);
+            border-radius: 3px;
+        }
+
         /* Hiệu ứng gáy sách */
         .book::before {
             content: '';
@@ -541,6 +556,7 @@
             background: rgba(255,255,255,0.7);
             padding: 2px 8px;
             border-radius: 10px;
+            z-index: 10;
         }
 
         /* Fix cho màn hình siêu nhỏ */
@@ -642,7 +658,6 @@
         ];
 
         // Biến lưu trạng thái
-        let isScene1Finished = false;
         let orientationChanged = false;
 
         // Kiểm tra hướng màn hình và reload nếu cần
@@ -775,7 +790,6 @@
                     scene1.style.display = 'none';
                     scene2.style.display = 'flex';
                     setTimeout(() => scene2.style.opacity = '1', 50);
-                    isScene1Finished = true;
                 }, 500);
             }, 2500);
         }, 200);
