@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Món Quà 12.1 - 8/3</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Dancing+Script:wght@700&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -47,7 +47,7 @@
         }
 
         .rotate-text {
-            font-family: 'Bubblegum Sans', cursive;
+            font-family: 'Baloo 2', cursive;
             font-size: 28px;
             color: var(--pink);
             margin-bottom: 15px;
@@ -279,7 +279,7 @@
             50% { background-position: 100% 50%; } 
         }
 
-        /* SCENE 1: BẮN TIM */
+        /* SCENE 1: BẮN TIM - Font Baloo to hơn */
         #scene-1 { 
             position: absolute; 
             inset: 0; 
@@ -296,18 +296,21 @@
         }
         
         .bubble-text { 
-            font-family: 'Bubblegum Sans', cursive; 
-            font-size: min(8vw, 60px); 
+            font-family: 'Baloo 2', cursive; 
+            font-size: min(12vw, 90px);
+            font-weight: 800;
             color: var(--pink); 
             opacity: 0; 
             transition: opacity 0.8s;
             text-align: center;
             padding: 0 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 3px 3px 6px rgba(255, 77, 109, 0.2);
             max-width: 100%;
             word-break: break-word;
             position: relative;
             z-index: 102;
+            letter-spacing: 2px;
+            line-height: 1.2;
         }
         
         .cat-container { 
@@ -341,7 +344,7 @@
             100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(2); opacity: 0; } 
         }
 
-        /* SCENE 2: THIỆP */
+        /* SCENE 2: THIỆP - ĐÃ BỎ GÁY SÁCH */
         #scene-2 { 
             position: absolute; 
             inset: 0; 
@@ -472,7 +475,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden; /* QUAN TRỌNG: Ẩn hoàn toàn thanh cuộn */
+            overflow: hidden;
             box-shadow: 0 5px 15px rgba(255, 77, 109, 0.1);
         }
 
@@ -493,9 +496,6 @@
             border: 1px solid #ffb6c1;
             pointer-events: none;
         }
-
-        /* Hiệu ứng gáy sách */
-       
 
         /* MŨI TÊN */
         .nav-arrow {
@@ -571,6 +571,10 @@
                 font-size: 12px;
                 padding: 2px 8px;
             }
+            
+            .bubble-text {
+                font-size: min(10vw, 70px) !important;
+            }
         }
     </style>
 </head>
@@ -638,7 +642,7 @@
             { anh: "anh3.jpg", chuc: "🌺 Cảm ơn vì đã luôn ở bên lớp cả những lúc vui lẫn buồn." },
             { anh: "anh4.jpg", chuc: "🌷 Các cậu hãy luôn là chính mình, vì các cậu rất đặc biệt." },
             { anh: "anh5.jpg", chuc: "🌹 Tụi tớ mong mọi điều may mắn và tốt đẹp nhất sẽ đến với các cậu." },
-            { anh: "anh6.jpg", chuc: "🌸 Hãy Cùng nhau tạo thêm thật nhiều kỷ niệm đẹp thời học sinh cấp 3 nha!" },
+            { anh: "anh6.jpg", chuc: "🌸 Hãy Cùng nhau tạo thêm thật nhiều kỷ niệm đẹp nha thời học sinh cấp 3!" },
             { anh: "anh7.jpg", chuc: "🌼 Hy vọng mọi ước mơ của các cậu sẽ chấp cánh cho các cậu bay cao thành công" },
             { anh: "anh8.jpg", chuc: "🌺 Dù có chuyện gì, 12.1 vẫn luôn ủng hộ các cậu." },
             { anh: "anh9.jpg", chuc: "🌷 Happy Women's Day! 12.1 with love! ❤️" },
@@ -706,7 +710,7 @@
                     backContent = `
                         <div class="cover-front" style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%) !important;">
                             <h2 style="font-size: clamp(1.2rem, 5vw, 2rem);">
-                                <br>❤️<br>Cảm ơn các bạn!
+                                The End<br>❤️<br>Cảm ơn các bạn!
                             </h2>
                         </div>
                     `;
@@ -850,5 +854,3 @@
     </script>
 </body>
 </html>
-
-
