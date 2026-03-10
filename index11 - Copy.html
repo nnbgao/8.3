@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Món Quà Hoàn Hảo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        :root {
+            --book-w: min(320px, 85vw);
+            --book-h: min(450px, 120vw);
+            --pink: #ff4d6d;
+        }
+
+        /* Style cho thông báo xoay màn hình */
+        .rotate-notice {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 240, 245, 0.98);
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .rotate-notice.show {
+            display: flex;
+        }
+
+        .rotate-icon {
+            font-size: 100px;
+            animation: rotatePhone 1.5s infinite ease;
+            margin-bottom: 30px;
+        }
+
+        .rotate-text {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 28px;
+            color: var(--pink);
+            margin-bottom: 15px;
+        }
+
+        .rotate-subtext {
+            font-family: 'Dancing Script', cursive;
+            font-size: 20px;
+            color: #ff8da1;
+        }
+
+        .auto-reload-text {
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            color: #999;
+            margin-top: 40px;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes rotatePhone {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(90deg); }
+            50% { transform: rotate(90deg); }
+            75% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        @keyframes blink {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        @media (max-width: 600px) {
+            :root { 
+                --book-w: min(85vw, 500px); 
+                --book-h: calc(min(85vw, 500px) * 1.4);
+            }
+            
+            .page-text { 
+                font-size: 1rem !important; 
+                padding: 8px !important;
+            }
+            .front, .back {
+                padding: 10px !important;
+            }
+        }
+
+        body, html {
+            margin: 0; 
+            padding: 0; 
+            width: 100%; 
+            height: 100%;
+            background: linear-gradient(-45deg, #fff0f0, #ffdde1, #ffd1d1, #fff5f5);
+            background-size: 400% 400%;
+            animation: pinkGradient 8s ease infinite;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            overflow: hidden;
+            position: fixed;
+            inset: 0;
+        }
+
+        @keyframes pinkGradient { 
+            0%, 100% { background-position: 0% 50%; } 
+            50% { background-position: 100% 50%; } 
+        }
+
+        /* SCENE 1: BẮN TIM */
+        #scene-1 { 
+            position: absolute; 
+            inset: 0; 
+            z-index: 100; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            transition: opacity 0.5s ease;
+            opacity: 1;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .bubble-text { 
+            font-family: 'Bubblegum Sans', cursive; 
+            font-size: min(8vw, 60px); 
+            color: var(--pink); 
+            opacity: 0; 
+            transition: opacity 0.8s;
+            text-align: center;
+            padding: 0 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            max-width: 100%;
+            word-break: break-word;
+        }
+        
+        .cat-container { 
+            position: absolute; 
+            bottom: 15%; 
+            left: 10%; 
+            z-index: 101;
+            max-width: 25%;
+        }
+        
+        .cat-img { 
+            height: auto;
+            width: 100%;
+            max-height: 120px;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+        }
+        
+        .heart { 
+            position: absolute; 
+            color: var(--pink); 
+            font-size: clamp(16px, 4vw, 24px);
+            pointer-events: none;
+            z-index: 200;
+            animation: fly 0.8s forwards; 
+            transform: translate(-50%, -50%);
+        }
+        
+        @keyframes fly { 
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 
+            100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(2); opacity: 0; } 
+        }
+
+        /* SCENE 2: THIỆP */
+        #scene-2 { 
+            position: absolute; 
+            inset: 0; 
+            display: none; 
+            opacity: 0; 
+            align-items: center; 
+            justify-content: center; 
+            perspective: 2000px; 
+            z-index: 50; 
+            transition: opacity 0.6s ease;
+            width: 100%;
+            height: 100%;
+            padding: 5px;
+        }
+        
+        .book-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .book {
+            position: relative;
+            width: var(--book-w);
+            height: var(--book-h);
+            transform-style: preserve-3d;
+            transform: translateX(calc(var(--book-w) / 2));
+            max-width: 100%;
+        }
+
+        .page {
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            top: 0; 
+            left: -100%;
+            transform-origin: right center; 
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: pointer;
+        }
+        
+        .page.flipped { 
+            transform: rotateY(-180deg); 
+        }
+
+        .front, .back {
+            position: absolute; 
+            width: 100%; 
+            height: 100%;
+            backface-visibility: hidden; 
+            border-radius: 5px 15px 15px 5px;
+            background: white; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center;
+            padding: 12px; 
+            box-sizing: border-box; 
+            border: 1px solid #ffebeb;
+            box-shadow: inset -15px 0 30px rgba(0,0,0,0.02);
+            overflow: hidden;
+        }
+        
+        .back { 
+            transform: rotateY(180deg); 
+            border-radius: 15px 5px 5px 15px; 
+        }
+        
+        .cover-front { 
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0) !important; 
+            color: white; 
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            padding: 8px !important;
+        }
+        
+        .page-img { 
+            width: 100%; 
+            height: auto; 
+            max-height: 100%;
+            object-fit: contain; 
+            border: 3px solid white; 
+            border-radius: 5px; 
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+        
+        .page-text { 
+            font-family: 'Dancing Script', cursive; 
+            font-size: clamp(1rem, 3.5vw, 1.6rem); 
+            color: var(--pink); 
+            text-align: center; 
+            word-break: break-word;
+            max-height: 100%;
+            overflow-y: auto;
+            padding: 5px;
+            line-height: 1.3;
+        }
+
+        /* MŨI TÊN */
+        .nav-arrow {
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%);
+            font-size: clamp(2rem, 8vw, 3rem); 
+            color: var(--pink); 
+            cursor: pointer;
+            z-index: 200; 
+            user-select: none; 
+            opacity: 0.7; 
+            transition: all 0.3s;
+            padding: 8px;
+            -webkit-tap-highlight-color: transparent;
+            background: rgba(255,255,255,0.4);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(3px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-arrow:active { 
+            opacity: 1; 
+            transform: translateY(-50%) scale(0.9); 
+            background: rgba(255,255,255,0.7);
+        }
+        
+        .arrow-left { 
+            left: 5px; 
+            display: none; 
+        }
+        
+        .arrow-right { 
+            right: 5px; 
+            animation: arrowBounce 1s infinite alternate; 
+        }
+        
+        @keyframes arrowBounce { 
+            from { transform: translateY(-50%) translateX(0); } 
+            to { transform: translateY(-50%) translateX(5px); } 
+        }
+
+        /* Fix cho màn hình siêu nhỏ */
+        @media (max-width: 380px) and (orientation: landscape) {
+            .nav-arrow {
+                width: 35px;
+                height: 35px;
+                font-size: 1.5rem;
+            }
+            
+            .front, .back {
+                padding: 6px !important;
+            }
+            
+            .page-text {
+                font-size: 0.9rem !important;
+            }
+            
+            .cover-front h2 {
+                font-size: 1rem !important;
+            }
+            
+            .cat-container {
+                max-width: 20%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Thông báo xoay màn hình -->
+    <div class="rotate-notice" id="rotateNotice">
+        <div class="rotate-icon">📱</div>
+        <div class="rotate-text">Xoay ngang màn hình để xem tiếp nhé!</div>
+        <div class="rotate-subtext">Mình sẽ tự reload khi bạn xoay xong ❤️</div>
+        <div class="auto-reload-text">Đang chờ xoay màn hình...</div>
+    </div>
+
+    <!-- SCENE 1: BẮN TIM -->
+    <div id="scene-1">
+        <h1 class="bubble-text" id="target">Happy Women's Day</h1>
+        <div class="cat-container" id="cat">
+            <!-- PASTE ẢNH CON MÈO CỦA BẠN VÀO ĐÂY -->
+            <img src="cat_clean.png" 
+                 class="cat-img" 
+                 alt="Cat"
+                 onerror="this.src='https://cdn-icons-png.flaticon.com/512/1864/1864514.png'">
+        </div>
+    </div>
+
+    <!-- SCENE 2: THIỆP -->
+    <div id="scene-2">
+        <div class="nav-arrow arrow-left" id="btn-left">❮</div>
+        <div class="book-container">
+            <div class="book" id="book-ui"></div>
+        </div>
+        <div class="nav-arrow arrow-right" id="btn-right">❯</div>
+    </div>
+
+    <script>
+        // DỮ LIỆU THIỆP - PASTE ẢNH CỦA BẠN VÀO ĐÂY
+        const dataThiep = [
+            { anh: "anh1.jpg", chuc: "🌸 Trang 1: Chúc cậu ngày 8/3 luôn xinh đẹp và rạng rỡ nhé!" },
+            { anh: "anh2.jpg", chuc: "🌼 Trang 2: Nụ cười của cậu luôn là điều tuyệt vời nhất." },
+            { anh: "anh3.jpg", chuc: "🌺 Trang 3: Cảm ơn vì đã luôn ở bên tớ những lúc vui buồn." },
+            { anh: "anh4.jpg", chuc: "🌷 Trang 4: Hãy luôn là chính mình, vì cậu rất đặc biệt." },
+            { anh: "anh5.jpg", chuc: "🌹 Trang 5: Mong mọi điều may mắn và tốt đẹp nhất sẽ đến với cậu." },
+            { anh: "anh6.jpg", chuc: "🌸 Trang 6: Cùng nhau tạo thêm thật nhiều kỷ niệm đẹp nha!" },
+            { anh: "anh7.jpg", chuc: "🌼 Trang 7: Hôm nay là ngày của cậu, hãy tận hưởng trọn vẹn nhé." },
+            { anh: "anh8.jpg", chuc: "🌺 Trang 8: Dù có chuyện gì, tớ vẫn luôn ủng hộ cậu." },
+            { anh: "anh9.jpg", chuc: "🌷 Trang 9: Happy Women's Day! Thương cậu nhiều! ❤️" },
+            { anh: "anh10.jpg", chuc: "🎀 Hết rồi ❤️" }
+        ];
+
+        // Biến lưu trạng thái
+        let isScene1Finished = false;
+        let orientationChanged = false;
+
+        // Kiểm tra hướng màn hình và reload nếu cần
+        function checkOrientationAndReload() {
+            const notice = document.getElementById('rotateNotice');
+            
+            if (window.innerHeight > window.innerWidth) {
+                // Màn hình dọc - hiện thông báo
+                notice.classList.add('show');
+                orientationChanged = true;
+            } else {
+                // Màn hình ngang
+                if (orientationChanged) {
+                    // Nếu trước đó đang dọc và vừa xoay ngang -> reload
+                    window.location.reload();
+                } else {
+                    // Lần đầu vào trang ở chế độ ngang
+                    notice.classList.remove('show');
+                }
+            }
+        }
+
+        // Lắng nghe sự kiện xoay màn hình
+        window.addEventListener('resize', function() {
+            checkOrientationAndReload();
+        });
+        
+        window.addEventListener('orientationchange', function() {
+            checkOrientationAndReload();
+        });
+
+        // === XÂY DỰNG CUỐN SÁCH ===
+        function buildBook() {
+            const bookUI = document.getElementById('book-ui');
+            if (!bookUI) return;
+            
+            let html = '';
+            
+            // Trang bìa trước
+            html += `<div class="page" style="z-index: 25">
+                        <div class="front cover-front"><h2 style="font-size: clamp(1rem, 4vw, 2rem); margin:0;">Món Quà<br>Cho Cậu</h2></div>
+                        <div class="back">
+                            <img src="${dataThiep[0].anh}" class="page-img" onerror="this.src='https://via.placeholder.com/300x400/ffb6c1/ffffff?text=Anh+1'">
+                        </div>
+                    </div>`;
+
+            // Các trang bên trong
+            for(let i = 0; i < dataThiep.length; i++) {
+                let z = 24 - i;
+                
+                let backContent = "";
+                if (i < dataThiep.length - 1) {
+                    backContent = `<img src="${dataThiep[i+1].anh}" class="page-img" onerror="this.src='https://via.placeholder.com/300x400/ffb6c1/ffffff?text=Anh+${i+2}'">`;
+                } else {
+                    backContent = `<div class="cover-front" style="background: linear-gradient(135deg, #ffc3a0, #ffafbd) !important;"><h2 style="font-size: clamp(1rem, 4vw, 2rem);">The End<br>❤️</h2></div>`;
+                }
+
+                html += `<div class="page" style="z-index: ${z}">
+                            <div class="front">
+                                <div class="page-text">${dataThiep[i].chuc}</div>
+                            </div>
+                            <div class="back">
+                                ${backContent}
+                            </div>
+                        </div>`;
+            }
+            bookUI.innerHTML = html;
+        }
+        
+        // Chỉ build sách khi ở chế độ ngang
+        if (window.innerWidth > window.innerHeight) {
+            buildBook();
+        }
+
+        // === BẮT ĐẦU HIỆU ỨNG BẮN TIM ===
+        setTimeout(() => {
+            // Kiểm tra lại một lần nữa
+            if (window.innerHeight > window.innerWidth) {
+                document.getElementById('rotateNotice').classList.add('show');
+                return;
+            }
+            
+            const cat = document.getElementById('cat');
+            const target = document.getElementById('target');
+            const scene1 = document.getElementById('scene-1');
+            const scene2 = document.getElementById('scene-2');
+            
+            if (!cat || !target || !scene1 || !scene2) return;
+            
+            // Hiện chữ
+            target.style.opacity = '1';
+            
+            // Bắn tim
+            const hInt = setInterval(() => {
+                const catEl = document.querySelector('.cat-img');
+                const targetEl = document.getElementById('target');
+                
+                if (!catEl || !targetEl) return;
+                
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                
+                const cr = catEl.getBoundingClientRect();
+                const tr = targetEl.getBoundingClientRect();
+                
+                if (cr.width === 0 || tr.width === 0) return;
+                
+                const sx = cr.left + cr.width / 2;
+                const sy = cr.top + cr.height / 4;
+                
+                const tx = (tr.left + Math.random() * tr.width) - sx;
+                const ty = (tr.top + Math.random() * tr.height * 0.7) - sy;
+                
+                heart.style.left = sx + 'px';
+                heart.style.top = sy + 'px';
+                heart.style.setProperty('--tx', tx + 'px');
+                heart.style.setProperty('--ty', ty + 'px');
+                
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 800);
+            }, 120);
+            
+            // Sau 2.5 giây chuyển cảnh
+            setTimeout(() => {
+                clearInterval(hInt);
+                scene1.style.opacity = '0';
+                setTimeout(() => {
+                    scene1.style.display = 'none';
+                    scene2.style.display = 'flex';
+                    setTimeout(() => scene2.style.opacity = '1', 50);
+                    isScene1Finished = true;
+                }, 500);
+            }, 2500);
+        }, 200);
+
+        // === XỬ LÝ LẬT TRANG ===
+        setTimeout(() => {
+            if (window.innerHeight > window.innerWidth) return;
+            
+            const pages = document.querySelectorAll('.page');
+            const btnLeft = document.getElementById('btn-left');
+            const btnRight = document.getElementById('btn-right');
+            
+            if (!pages.length || !btnLeft || !btnRight) return;
+            
+            let currentPageIndex = 0;
+            const totalPages = pages.length;
+
+            function updateArrows() {
+                btnLeft.style.display = currentPageIndex > 0 ? 'flex' : 'none';
+                btnRight.style.display = currentPageIndex < totalPages ? 'flex' : 'none';
+            }
+
+            function flipNext() {
+                if (currentPageIndex < totalPages) {
+                    const p = pages[currentPageIndex];
+                    p.classList.add('flipped');
+                    p.style.zIndex = currentPageIndex + 1;
+                    currentPageIndex++;
+                    updateArrows();
+                }
+            }
+
+            function flipBack() {
+                if (currentPageIndex > 0) {
+                    currentPageIndex--;
+                    const p = pages[currentPageIndex];
+                    p.classList.remove('flipped');
+                    p.style.zIndex = 25 - currentPageIndex;
+                    updateArrows();
+                }
+            }
+
+            btnRight.onclick = (e) => {
+                e.stopPropagation();
+                flipNext();
+            };
+            
+            btnLeft.onclick = (e) => {
+                e.stopPropagation();
+                flipBack();
+            };
+            
+            pages.forEach((p) => {
+                p.onclick = function(e) {
+                    e.stopPropagation();
+                    if(!this.classList.contains('flipped')) {
+                        flipNext();
+                    } else {
+                        flipBack();
+                    }
+                };
+            });
+
+            updateArrows();
+        }, 300);
+    </script>
+</body>
+</html>
