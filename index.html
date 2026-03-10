@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Món Quà Hoàn Hảo</title>
+    <title>Món Quà 12.1 - 8/3</title>
     <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -59,14 +59,6 @@
             color: #ff8da1;
         }
 
-        .auto-reload-text {
-            font-family: 'Arial', sans-serif;
-            font-size: 14px;
-            color: #999;
-            margin-top: 40px;
-            animation: blink 1.5s infinite;
-        }
-
         @keyframes rotatePhone {
             0% { transform: rotate(0deg); }
             25% { transform: rotate(90deg); }
@@ -75,10 +67,175 @@
             100% { transform: rotate(0deg); }
         }
 
-        @keyframes blink {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
+        /* ===== BACKGROUND MÂY VÀ SAO ===== */
+        .clouds {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 1000px;
+            box-shadow: 0 5px 15px rgba(255, 192, 203, 0.2);
+            backdrop-filter: blur(2px);
+            animation: floatCloud linear infinite;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(255, 192, 203, 0.2);
+        }
+
+        .cloud1 {
+            width: 200px;
+            height: 70px;
+            top: 15%;
+            left: -200px;
+            animation-duration: 35s;
+        }
+        .cloud1::before {
+            width: 100px;
+            height: 100px;
+            top: -50px;
+            left: 20px;
+        }
+        .cloud1::after {
+            width: 120px;
+            height: 120px;
+            top: -60px;
+            left: 80px;
+        }
+
+        .cloud2 {
+            width: 250px;
+            height: 80px;
+            top: 45%;
+            left: -250px;
+            animation-duration: 45s;
+            animation-delay: 5s;
+        }
+        .cloud2::before {
+            width: 120px;
+            height: 120px;
+            top: -60px;
+            left: 30px;
+        }
+        .cloud2::after {
+            width: 140px;
+            height: 140px;
+            top: -70px;
+            left: 100px;
+        }
+
+        .cloud3 {
+            width: 180px;
+            height: 60px;
+            bottom: 20%;
+            left: -180px;
+            animation-duration: 30s;
+            animation-delay: 2s;
+        }
+        .cloud3::before {
+            width: 90px;
+            height: 90px;
+            top: -45px;
+            left: 20px;
+        }
+        .cloud3::after {
+            width: 100px;
+            height: 100px;
+            top: -50px;
+            left: 70px;
+        }
+
+        .cloud4 {
+            width: 220px;
+            height: 75px;
+            top: 70%;
+            left: -220px;
+            animation-duration: 40s;
+            animation-delay: 8s;
+        }
+        .cloud4::before {
+            width: 110px;
+            height: 110px;
+            top: -55px;
+            left: 25px;
+        }
+        .cloud4::after {
+            width: 130px;
+            height: 130px;
+            top: -65px;
+            left: 90px;
+        }
+
+        @keyframes floatCloud {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(calc(100vw + 300px));
+            }
+        }
+
+        /* ===== SAO NHẤP NHÁY ===== */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff9e6;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ffd9e6, 0 0 20px #ffb3c6;
+            animation: twinkle 3s infinite ease-in-out;
+            opacity: 0;
+        }
+
+        .star1 { width: 4px; height: 4px; top: 10%; left: 15%; animation-duration: 2s; animation-delay: 0s; }
+        .star2 { width: 3px; height: 3px; top: 25%; left: 85%; animation-duration: 2.5s; animation-delay: 0.7s; }
+        .star3 { width: 5px; height: 5px; top: 40%; left: 30%; animation-duration: 3s; animation-delay: 1.2s; }
+        .star4 { width: 3px; height: 3px; top: 55%; left: 70%; animation-duration: 2.2s; animation-delay: 0.3s; }
+        .star5 { width: 4px; height: 4px; top: 70%; left: 20%; animation-duration: 2.8s; animation-delay: 1.5s; }
+        .star6 { width: 6px; height: 6px; top: 15%; left: 50%; animation-duration: 3.2s; animation-delay: 0.9s; }
+        .star7 { width: 3px; height: 3px; top: 85%; left: 40%; animation-duration: 2.3s; animation-delay: 1.8s; }
+        .star8 { width: 4px; height: 4px; top: 45%; left: 95%; animation-duration: 2.6s; animation-delay: 0.4s; }
+        .star9 { width: 5px; height: 5px; top: 60%; left: 10%; animation-duration: 3.5s; animation-delay: 1.1s; }
+        .star10 { width: 3px; height: 3px; top: 30%; left: 65%; animation-duration: 2.4s; animation-delay: 2s; }
+        .star11 { width: 4px; height: 4px; top: 75%; left: 80%; animation-duration: 2.9s; animation-delay: 0.6s; }
+        .star12 { width: 5px; height: 5px; top: 90%; left: 55%; animation-duration: 3.1s; animation-delay: 1.4s; }
+        .star13 { width: 3px; height: 3px; top: 20%; left: 25%; animation-duration: 2.7s; animation-delay: 0.2s; }
+        .star14 { width: 4px; height: 4px; top: 50%; left: 45%; animation-duration: 3.3s; animation-delay: 1.9s; }
+        .star15 { width: 6px; height: 6px; top: 35%; left: 5%; animation-duration: 2.1s; animation-delay: 0.8s; }
+
+        @keyframes twinkle {
+            0%, 100% { 
+                opacity: 0;
+                transform: scale(0.5);
+                box-shadow: 0 0 5px #ffd9e6;
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1);
+                box-shadow: 0 0 15px #ffb3c6, 0 0 30px #ff99aa;
+            }
         }
 
         @media (max-width: 600px) {
@@ -94,6 +251,15 @@
             .front, .back {
                 padding: 10px !important;
             }
+            
+            /* Điều chỉnh mây trên mobile */
+            .cloud1 { width: 150px; height: 50px; }
+            .cloud1::before { width: 70px; height: 70px; top: -35px; }
+            .cloud1::after { width: 85px; height: 85px; top: -42px; }
+            
+            .cloud2 { width: 180px; height: 60px; }
+            .cloud2::before { width: 85px; height: 85px; top: -42px; }
+            .cloud2::after { width: 100px; height: 100px; top: -50px; }
         }
 
         body, html {
@@ -143,6 +309,8 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
             max-width: 100%;
             word-break: break-word;
+            position: relative;
+            z-index: 102;
         }
         
         .cat-container { 
@@ -184,7 +352,7 @@
             opacity: 0; 
             align-items: center; 
             justify-content: center; 
-            perspective: 2000px; 
+            perspective: 2500px; 
             z-index: 50; 
             transition: opacity 0.6s ease;
             width: 100%;
@@ -199,6 +367,7 @@
             width: 100%;
             height: 100%;
             position: relative;
+            z-index: 51;
         }
 
         .book {
@@ -206,8 +375,9 @@
             width: var(--book-w);
             height: var(--book-h);
             transform-style: preserve-3d;
-            transform: translateX(calc(var(--book-w) / 2));
+            transform: translateX(calc(var(--book-w) / 2)) rotateX(2deg);
             max-width: 100%;
+            filter: drop-shadow(0 20px 30px rgba(255, 77, 109, 0.2));
         }
 
         .page {
@@ -218,12 +388,12 @@
             left: -100%;
             transform-origin: right center; 
             transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
         }
         
         .page.flipped { 
-            transform: rotateY(-180deg); 
+            transform: rotateY(-180deg) translateZ(1px); 
         }
 
         .front, .back {
@@ -237,25 +407,35 @@
             flex-direction: column;
             align-items: center; 
             justify-content: center;
-            padding: 12px; 
+            padding: 15px; 
             box-sizing: border-box; 
-            border: 1px solid #ffebeb;
-            box-shadow: inset -15px 0 30px rgba(0,0,0,0.02);
+            border: 2px solid #ffe4e4;
+            box-shadow: 
+                inset -15px 0 30px rgba(255, 200, 200, 0.1),
+                0 5px 15px rgba(255, 77, 109, 0.1);
             overflow: hidden;
         }
         
         .back { 
             transform: rotateY(180deg); 
             border-radius: 15px 5px 5px 15px; 
+            box-shadow: 
+                inset 15px 0 30px rgba(255, 200, 200, 0.1),
+                0 5px 15px rgba(255, 77, 109, 0.1);
         }
         
         .cover-front { 
-            background: linear-gradient(135deg, #ffafbd, #ffc3a0) !important; 
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%) !important; 
             color: white; 
             font-size: clamp(1.2rem, 4vw, 2rem);
             text-align: center;
             font-family: 'Dancing Script', cursive;
             padding: 8px !important;
+            border: 2px solid #fff !important;
+        }
+
+        .cover-front h2 {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
         
         .page-img { 
@@ -263,21 +443,46 @@
             height: auto; 
             max-height: 100%;
             object-fit: contain; 
-            border: 3px solid white; 
-            border-radius: 5px; 
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            border: 5px solid white; 
+            border-radius: 10px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            background: #f9f9f9;
+        }
+
+        .page-img:hover {
+            transform: scale(1.02);
         }
         
         .page-text { 
             font-family: 'Dancing Script', cursive; 
-            font-size: clamp(1rem, 3.5vw, 1.6rem); 
+            font-size: clamp(1rem, 3.5vw, 1.5rem); 
             color: var(--pink); 
             text-align: center; 
             word-break: break-word;
             max-height: 100%;
             overflow-y: auto;
-            padding: 5px;
-            line-height: 1.3;
+            padding: 10px;
+            line-height: 1.4;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            margin: 5px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+        }
+
+        /* Hiệu ứng gáy sách */
+        .book::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: calc(50% - 2px);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to right, #ffb6c1, #ff99aa);
+            transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(255, 77, 109, 0.3);
+            z-index: 300;
         }
 
         /* MŨI TÊN */
@@ -286,44 +491,56 @@
             top: 50%; 
             transform: translateY(-50%);
             font-size: clamp(2rem, 8vw, 3rem); 
-            color: var(--pink); 
+            color: white; 
             cursor: pointer;
             z-index: 200; 
             user-select: none; 
-            opacity: 0.7; 
             transition: all 0.3s;
             padding: 8px;
             -webkit-tap-highlight-color: transparent;
-            background: rgba(255,255,255,0.4);
+            background: var(--pink);
             border-radius: 50%;
             width: 45px;
             height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(3px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            border: 2px solid white;
         }
         
         .nav-arrow:active { 
-            opacity: 1; 
             transform: translateY(-50%) scale(0.9); 
-            background: rgba(255,255,255,0.7);
+            background: #ff3355;
+            box-shadow: 0 2px 10px rgba(255, 77, 109, 0.6);
         }
         
         .arrow-left { 
-            left: 5px; 
+            left: 10px; 
             display: none; 
         }
         
         .arrow-right { 
-            right: 5px; 
+            right: 10px; 
             animation: arrowBounce 1s infinite alternate; 
         }
         
         @keyframes arrowBounce { 
             from { transform: translateY(-50%) translateX(0); } 
-            to { transform: translateY(-50%) translateX(5px); } 
+            to { transform: translateY(-50%) translateX(8px); } 
+        }
+
+        /* Hiệu ứng số trang */
+        .page-number {
+            position: absolute;
+            bottom: 5px;
+            right: 15px;
+            font-size: 12px;
+            color: #ffb6c1;
+            font-family: 'Arial', sans-serif;
+            background: rgba(255,255,255,0.7);
+            padding: 2px 8px;
+            border-radius: 10px;
         }
 
         /* Fix cho màn hình siêu nhỏ */
@@ -339,7 +556,8 @@
             }
             
             .page-text {
-                font-size: 0.9rem !important;
+                font-size: 0.85rem !important;
+                padding: 5px;
             }
             
             .cover-front h2 {
@@ -353,12 +571,38 @@
     </style>
 </head>
 <body>
+    <!-- BACKGROUND MÂY TRÔI -->
+    <div class="clouds">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+        <div class="cloud cloud4"></div>
+    </div>
+
+    <!-- SAO NHẤP NHÁY -->
+    <div class="stars">
+        <div class="star star1"></div>
+        <div class="star star2"></div>
+        <div class="star star3"></div>
+        <div class="star star4"></div>
+        <div class="star star5"></div>
+        <div class="star star6"></div>
+        <div class="star star7"></div>
+        <div class="star star8"></div>
+        <div class="star star9"></div>
+        <div class="star star10"></div>
+        <div class="star star11"></div>
+        <div class="star star12"></div>
+        <div class="star star13"></div>
+        <div class="star star14"></div>
+        <div class="star star15"></div>
+    </div>
+
     <!-- Thông báo xoay màn hình -->
     <div class="rotate-notice" id="rotateNotice">
         <div class="rotate-icon">📱</div>
         <div class="rotate-text">Xoay ngang màn hình để xem tiếp nhé!</div>
-        <div class="rotate-subtext">Mình sẽ tự reload khi bạn xoay xong ❤️</div>
-        <div class="auto-reload-text">Đang chờ xoay màn hình...</div>
+        <div class="rotate-subtext">Tụi tớ sẽ tự reload khi bạn xoay xong ❤️</div>
     </div>
 
     <!-- SCENE 1: BẮN TIM -->
@@ -383,7 +627,7 @@
     </div>
 
     <script>
-        // DỮ LIỆU THIỆP - PASTE ẢNH CỦA BẠN VÀO ĐÂY
+        // ===== DỮ LIỆU THIỆP =====
         const dataThiep = [
             { anh: "anh1.jpg", chuc: "🌸 Chúc các cậu ngày 8/3 luôn xinh đẹp và rạng rỡ nhé!" },
             { anh: "anh2.jpg", chuc: "🌼 Nụ cười của các cậu luôn là điều tuyệt vời nhất." },
@@ -391,9 +635,9 @@
             { anh: "anh4.jpg", chuc: "🌷 Các cậu hãy luôn là chính mình, vì các cậu rất đặc biệt." },
             { anh: "anh5.jpg", chuc: "🌹 Tụi tớ mong mọi điều may mắn và tốt đẹp nhất sẽ đến với các cậu." },
             { anh: "anh6.jpg", chuc: "🌸 Hãy Cùng nhau tạo thêm thật nhiều kỷ niệm đẹp nha thời học sinh cấp 3!" },
-            { anh: "anh7.jpg", chuc: "🌼 Hy vọng mọi ước mơ của các cậu sẽ chấp cánh cho các cậu bay cao thanh công" },
+            { anh: "anh7.jpg", chuc: "🌼 Hy vọng mọi ước mơ của các cậu sẽ chấp cánh cho các cậu bay cao thành công" },
             { anh: "anh8.jpg", chuc: "🌺 Dù có chuyện gì, 12.1 vẫn luôn ủng hộ các cậu." },
-            { anh: "anh9.jpg", chuc: "🌷 Trang 9: Happy Women's Day! 12.1 with love! ❤️" },
+            { anh: "anh9.jpg", chuc: "🌷 Happy Women's Day! 12.1 with love! ❤️" },
             { anh: "anh10.jpg", chuc: "🎀 Hết rồi ❤️" }
         ];
 
@@ -406,59 +650,65 @@
             const notice = document.getElementById('rotateNotice');
             
             if (window.innerHeight > window.innerWidth) {
-                // Màn hình dọc - hiện thông báo
                 notice.classList.add('show');
                 orientationChanged = true;
             } else {
-                // Màn hình ngang
                 if (orientationChanged) {
-                    // Nếu trước đó đang dọc và vừa xoay ngang -> reload
                     window.location.reload();
                 } else {
-                    // Lần đầu vào trang ở chế độ ngang
                     notice.classList.remove('show');
                 }
             }
         }
 
-        // Lắng nghe sự kiện xoay màn hình
-        window.addEventListener('resize', function() {
-            checkOrientationAndReload();
-        });
-        
-        window.addEventListener('orientationchange', function() {
-            checkOrientationAndReload();
-        });
+        window.addEventListener('resize', checkOrientationAndReload);
+        window.addEventListener('orientationchange', checkOrientationAndReload);
 
-        // === XÂY DỰNG CUỐN SÁCH ===
+        // Xây dựng sách
         function buildBook() {
             const bookUI = document.getElementById('book-ui');
             if (!bookUI) return;
             
             let html = '';
             
-            // Trang bìa trước
+            // Bìa trước
             html += `<div class="page" style="z-index: 25">
-                        <div class="front cover-front"><h2 style="font-size: clamp(1rem, 4vw, 2rem); margin:0;">Món Quà<br>Cho Cậu</h2></div>
+                        <div class="front cover-front">
+                            <h2 style="font-size: clamp(1.2rem, 5vw, 2.2rem); margin:0; line-height:1.3;">
+                                12.1<br>Gửi Các Bạn Nữ<br>🌸
+                            </h2>
+                        </div>
                         <div class="back">
                             <img src="${dataThiep[0].anh}" class="page-img" onerror="this.src='https://via.placeholder.com/300x400/ffb6c1/ffffff?text=Anh+1'">
+                            <div class="page-number">1/10</div>
                         </div>
                     </div>`;
 
-            // Các trang bên trong
+            // Các trang trong
             for(let i = 0; i < dataThiep.length; i++) {
                 let z = 24 - i;
+                let pageNumber = i + 1;
                 
                 let backContent = "";
                 if (i < dataThiep.length - 1) {
-                    backContent = `<img src="${dataThiep[i+1].anh}" class="page-img" onerror="this.src='https://via.placeholder.com/300x400/ffb6c1/ffffff?text=Anh+${i+2}'">`;
+                    backContent = `
+                        <img src="${dataThiep[i+1].anh}" class="page-img" onerror="this.src='https://via.placeholder.com/300x400/ffb6c1/ffffff?text=Anh+${i+2}'">
+                        <div class="page-number">${i+2}/10</div>
+                    `;
                 } else {
-                    backContent = `<div class="cover-front" style="background: linear-gradient(135deg, #ffc3a0, #ffafbd) !important;"><h2 style="font-size: clamp(1rem, 4vw, 2rem);">The End<br>❤️</h2></div>`;
+                    backContent = `
+                        <div class="cover-front" style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%) !important;">
+                            <h2 style="font-size: clamp(1.2rem, 5vw, 2rem);">
+                                The End<br>❤️<br>Cảm ơn các bạn!
+                            </h2>
+                        </div>
+                    `;
                 }
 
                 html += `<div class="page" style="z-index: ${z}">
                             <div class="front">
                                 <div class="page-text">${dataThiep[i].chuc}</div>
+                                <div class="page-number">${pageNumber}/10</div>
                             </div>
                             <div class="back">
                                 ${backContent}
@@ -468,14 +718,12 @@
             bookUI.innerHTML = html;
         }
         
-        // Chỉ build sách khi ở chế độ ngang
         if (window.innerWidth > window.innerHeight) {
             buildBook();
         }
 
-        // === BẮT ĐẦU HIỆU ỨNG BẮN TIM ===
+        // Bắn tim
         setTimeout(() => {
-            // Kiểm tra lại một lần nữa
             if (window.innerHeight > window.innerWidth) {
                 document.getElementById('rotateNotice').classList.add('show');
                 return;
@@ -488,10 +736,8 @@
             
             if (!cat || !target || !scene1 || !scene2) return;
             
-            // Hiện chữ
             target.style.opacity = '1';
             
-            // Bắn tim
             const hInt = setInterval(() => {
                 const catEl = document.querySelector('.cat-img');
                 const targetEl = document.getElementById('target');
@@ -522,7 +768,6 @@
                 setTimeout(() => heart.remove(), 800);
             }, 120);
             
-            // Sau 2.5 giây chuyển cảnh
             setTimeout(() => {
                 clearInterval(hInt);
                 scene1.style.opacity = '0';
@@ -535,7 +780,7 @@
             }, 2500);
         }, 200);
 
-        // === XỬ LÝ LẬT TRANG ===
+        // Lật trang
         setTimeout(() => {
             if (window.innerHeight > window.innerWidth) return;
             
@@ -599,4 +844,3 @@
     </script>
 </body>
 </html>
-
